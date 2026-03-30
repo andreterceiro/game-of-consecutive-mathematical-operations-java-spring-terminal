@@ -7,6 +7,7 @@
 OBS: You will do not need:
 
 - A special class or dependency to make a command line appliction. Your Spring boilerplate will already has the necessary classes;
+- To add a .gitgnore file. The boilerplate will already provide a .gitigore file
 
 
 ## Running the application
