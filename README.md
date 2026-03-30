@@ -26,6 +26,8 @@ public class Main implements CommandLineRunner {
 }
 ```
 
+OBS: The method run of the class that implements **CommandLineRunner** (above) will be called when you run the application (instructions in the next step).
+
 
 ## Running the application
 
