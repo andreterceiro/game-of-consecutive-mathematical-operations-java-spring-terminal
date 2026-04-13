@@ -22,10 +22,9 @@ public class Main implements CommandLineRunner {
         }
         StringBuilder sb = new StringBuilder(output);
 
-        System.out.println(output.length());
-
         sb.replace(output.length() - 2, output.length() -1, "=");
 
+        System.out.println(numbers.stream().reduce(0,Integer::sum));
         System.out.println(sb.toString());
     }
 }
