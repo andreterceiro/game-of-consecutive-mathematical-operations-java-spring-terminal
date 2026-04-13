@@ -23,12 +23,19 @@ public class Main implements CommandLineRunner {
         for (int number: numbers) {
             output += number + " + ";
         }
+
+        Integer rightSum = numbers.stream().reduce(0,Integer::sum);
+
         StringBuilder sb = new StringBuilder(output);
         sb.replace(output.length() - 2, output.length() -1, "=");
-        //System.out.println(numbers.stream().reduce(0,Integer::sum));
         System.out.println(sb.toString());
         System.out.print("Digite a soma por favor: ");
         Integer userSum = Integer.parseInt(scanner.nextLine());
-        System.out.println(userSum);
+
+        if (userSum.equals(rightSum)) {
+            System.out.println("Você está correto!");
+        } else {
+            System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
+        }
     }
 }
