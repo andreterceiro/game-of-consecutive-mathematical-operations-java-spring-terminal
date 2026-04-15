@@ -13,29 +13,35 @@ public class Main implements CommandLineRunner {
     public void run(String ...args) throws Exception
     {
         Random gerador = new Random();
-        Scanner scanner = new Scanner(System.in);
 
-        numbers.add(gerador.nextInt(100));
-        numbers.add(gerador.nextInt(100));
-        numbers.add(gerador.nextInt(100));        
-        String output = "";
 
-        for (int number: numbers) {
-            output += number + " + ";
-        }
+        this.numbers.add(gerador.nextInt(100));
+        this.numbers.add(gerador.nextInt(100));
+        this.numbers.add(gerador.nextInt(100));
 
-        Integer rightSum = numbers.stream().reduce(0,Integer::sum);
+        Integer userSum = this.askForTheSum();
 
-        StringBuilder sb = new StringBuilder(output);
-        sb.replace(output.length() - 2, output.length() -1, "=");
-        System.out.println(sb.toString());
-        System.out.print("Digite a soma por favor: ");
-        Integer userSum = Integer.parseInt(scanner.nextLine());
+        Integer rightSum = this.numbers.stream().reduce(0,Integer::sum);
 
         if (userSum.equals(rightSum)) {
             System.out.println("Você está correto!");
         } else {
             System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
         }
+    }
+
+    private Integer askForTheSum() {
+        Scanner scanner = new Scanner(System.in);
+        String output = "";
+
+        for (int number: numbers) {
+            output += number + " + ";
+        }
+
+        StringBuilder sb = new StringBuilder(output);
+        sb.replace(output.length() - 2, output.length() -1, "=");
+        System.out.println(sb.toString());
+        System.out.print("Digite a soma por favor: ");
+        return Integer.parseInt(scanner.nextLine());
     }
 }
