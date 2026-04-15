@@ -8,6 +8,7 @@ import java.util.Scanner;
 @Component
 public class Main implements CommandLineRunner {
     Vector<Integer> numbers = new Vector<>();
+    Integer acertos = 0;
 
     @Override
     public void run(String ...args) throws Exception
@@ -17,17 +18,21 @@ public class Main implements CommandLineRunner {
 
         this.numbers.add(gerador.nextInt(100));
         this.numbers.add(gerador.nextInt(100));
-        this.numbers.add(gerador.nextInt(100));
 
-        Integer userSum = this.askForTheSum();
 
-        Integer rightSum = this.numbers.stream().reduce(0,Integer::sum);
+        while(true) {
+            this.numbers.add(gerador.nextInt(100));
+            Integer userSum = this.askForTheSum();
+            Integer rightSum = this.numbers.stream().reduce(0,Integer::sum);
 
-        if (userSum.equals(rightSum)) {
-            System.out.println("Você está correto!");
-        } else {
-            System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
+            if (! userSum.equals(rightSum)) {
+                System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
+                break;
+            }
+            acertos = acertos + 1;
         }
+
+        System.out.println("Você acertou " + acertos + " somas");
     }
 
     private Integer askForTheSum() {
