@@ -4,35 +4,47 @@ import org.springframework.stereotype.Component;
 import java.util.Vector;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Collections;
 
 @Component
 public class Main implements CommandLineRunner {
     Vector<Integer> numbers = new Vector<>();
     Integer acertos = 0;
+    Vector<Integer> placar = new Vector<>();
 
     @Override
     public void run(String ...args) throws Exception
     {
         Random gerador = new Random();
 
-
-        this.numbers.add(gerador.nextInt(100));
-        this.numbers.add(gerador.nextInt(100));
-
-
         while(true) {
+            this.numbers.clear();
             this.numbers.add(gerador.nextInt(100));
-            Integer userSum = this.askForTheSum();
-            Integer rightSum = this.numbers.stream().reduce(0,Integer::sum);
+            this.numbers.add(gerador.nextInt(100));
 
-            if (! userSum.equals(rightSum)) {
-                System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
-                break;
+
+            while(true) {
+                this.numbers.add(gerador.nextInt(100));
+                Integer userSum = this.askForTheSum();
+                Integer rightSum = this.numbers.stream().reduce(0,Integer::sum);
+
+                if (! userSum.equals(rightSum)) {
+                    System.out.println("Você errou. O resultado correto é " + String.valueOf(rightSum));
+                    placar.add(acertos);
+                    break;
+                }
+                acertos = acertos + 1;
             }
-            acertos = acertos + 1;
-        }
 
-        System.out.println("Você acertou " + acertos + " somas");
+            System.out.println("Você acertou " + acertos + " somas\n");
+            System.out.println("Placar: ");
+            Collections.sort(placar, Collections.reverseOrder());
+            for (Integer acerto: placar) {
+                System.out.println("Acertos: " +  String.valueOf(acerto));
+            }
+            acertos = 0;
+            System.out.println("\n\n-----------------------------------------\n\n");
+        }
     }
 
     private Integer askForTheSum() {
