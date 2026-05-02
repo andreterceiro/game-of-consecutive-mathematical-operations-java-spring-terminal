@@ -36,7 +36,7 @@ public class Main implements CommandLineRunner {
                 acertos = acertos + 1;
             }
 
-            System.out.println("Você acertou " + acertos + " somas\n");
+            System.out.println("Você acertou " + acertos + " soma(s)\n");
             System.out.println("Placar: ");
             Collections.sort(placar, Collections.reverseOrder());
             for (Integer acerto: placar) {
