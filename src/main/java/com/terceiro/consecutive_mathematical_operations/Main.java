@@ -5,16 +5,27 @@ import java.util.Vector;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class Main implements CommandLineRunner {
     Vector<Integer> numbers = new Vector<>();
     Integer acertos = 0;
     Vector<Integer> placar = new Vector<>();
+    Map<String, Integer> relacaoNiveisOpcoes = new HashMap<>();
+
+    private void iniciarRelacaoNiveisOpcoes()
+    {
+        this.relacaoNiveisOpcoes.put("Fácil", 10);
+        this.relacaoNiveisOpcoes.put("Médio", 100);
+        this.relacaoNiveisOpcoes.put("Difícil", 1000);
+    }
 
     @Override
     public void run(String ...args) throws Exception
     {
+        this.iniciarRelacaoNiveisOpcoes();
         Random gerador = new Random();
 
         while(true) {
